@@ -65,7 +65,21 @@ DisjointSets *makeDisjointSets(int n) {
 ///        compression while you are performing the find.
 
 int find(DisjointSets *ds, int n) {  // with compress
-  // code here
+  int *p = NULL;
+  int *q = NULL;
+
+  // this code isn't complete yet and isn't tested. Some translation bugs from pseudocode need to be fixed
+  
+  *(p) = n;
+  while (p != ds->parents[n]) {
+    p = ds->parents[p];
+  }
+
+  while (ds->parents[n] != p) {
+    q = ds->parents[n];
+    ds->parents[n] = p;
+  }
+
   return -1;                         // Replace this
 }
 
