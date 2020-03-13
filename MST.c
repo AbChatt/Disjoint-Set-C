@@ -41,16 +41,14 @@ void printDisjointSets(DisjointSets *ds) {
 ///        MakeSet() on all the nodes
 DisjointSets *makeDisjointSets(int n) {
   DisjointSets *new_disjoint_set = malloc(1 * sizeof(DisjointSets));
-  new_disjoint_set->parents = {-1};
-  new_disjoint_set->ranks = {-1};
+  new_disjoint_set->parents = malloc(n * sizeof(int *));
+  new_disjoint_set->ranks = malloc(n * sizeof(int *));
   new_disjoint_set->size = 0;
 
   for (int i = 0; i < n; i++) {
-    if (new_disjoint_set->parents[i] == -1) {
-      new_disjoint_set->parents[i] = i;
-      new_disjoint_set->ranks[i] = 0;
-      new_disjoint_set->size++;
-    }
+    new_disjoint_set->parents[i] = i;
+    new_disjoint_set->ranks[i] = 0;
+    new_disjoint_set->size++;
   }
   
   return new_disjoint_set;
@@ -70,17 +68,18 @@ int find(DisjointSets *ds, int n) {  // with compress
 
   // this code isn't complete yet and isn't tested. Some translation bugs from pseudocode need to be fixed
   
-  *(p) = n;
-  while (p != ds->parents[n]) {
-    p = ds->parents[p];
-  }
+  // p = &n;
+  // while (&(ds->parents[*(p)]) != p) {
+  //   p = &(ds->parents[*(p)]);
+  // }
 
-  while (ds->parents[n] != p) {
-    q = ds->parents[n];
-    ds->parents[n] = p;
-  }
+  // while (&(ds->parents[n]) != p) {
+  //   q = &(ds->parents[n]);
+  //   ds->parents[n] = *(p);
+  //   n = *(q);     // check this line
+  // }
 
-  return -1;                         // Replace this
+  return *(p);
 }
 
 /// @brief Permorms the union of two nodes in the Disjoint Sets
