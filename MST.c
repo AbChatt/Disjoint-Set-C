@@ -51,14 +51,14 @@ DisjointSets *makeDisjointSets(int n) {
 
   if (new_disjoint_set->parents == NULL) {
     printf("Error occurred! Exiting program...\n");
-    return new_disjoint_set->parents;
+    return NULL;
   }
 
   new_disjoint_set->ranks = malloc(n * sizeof(int *));
 
   if (new_disjoint_set->ranks == NULL) {
     printf("Error occurred! Exiting program...\n");
-    return new_disjoint_set->ranks;
+    return NULL;
   }
 
   //new_disjoint_set->parents = { -1 };
@@ -83,23 +83,26 @@ DisjointSets *makeDisjointSets(int n) {
 ///        compression while you are performing the find.
 
 int find(DisjointSets *ds, int n) {  // with compress
-  int *p = NULL;
-  int *q = NULL;
+  int root = -1;
+  int parent = -1;
+  int temp = -1;
 
-  // this code isn't complete yet and isn't tested. Some translation bugs from pseudocode need to be fixed
+  root = n;
+
+  while (ds->parents[root] != root) {
+    root = ds->parents[root];
+  }
+
+  parent = n;
+
+  // path compression
+  while (ds->parents[parent] != root) {
+    temp = ds->parents[parent];
+    ds->parents[parent] = root;
+    parent = temp;
+  }
   
-  // p = &n;
-  // while (&(ds->parents[*(p)]) != p) {
-  //   p = &(ds->parents[*(p)]);
-  // }
-
-  // while (&(ds->parents[n]) != p) {
-  //   q = &(ds->parents[n]);
-  //   ds->parents[n] = *(p);
-  //   n = *(q);     // check this line
-  // }
-
-  return *(p);
+  return root;
 }
 
 /// @brief Permorms the union of two nodes in the Disjoint Sets
@@ -113,6 +116,15 @@ int find(DisjointSets *ds, int n) {  // with compress
 ///        root, and increase the latter's rank by one. Otherwise, the root
 ///        with the higher rank becomes the parent of the other.
 void join(DisjointSets *ds, int x, int y) {
+  int root_x = -1;
+  int root_y = -1;
+
+  root_x = find(ds, x);
+  root_y = find(ds, y);
+
+  if (ds->ranks[root_x] > ds->ranks[root_y]) {
+    
+  }
   return;  // Do the stuff before returning
 }
 
@@ -159,5 +171,6 @@ int compareEdgeCosts(const void *x, const void *y) {
 /// @TODO: Complete this function. You may want to look into how the function
 ///        `qsort()` works in case you need it (hint hint).
 void findMST(Edge graph[], int n, int m, Edge mst[]) {
+  // hint: code is only 1 if statement
   return;  // Compute and store the MST in `mst` before returning.
 }

@@ -34,6 +34,7 @@ void test_ds1() {
   }
   assert(find(ds, 7) == 0);
   for (int i = 0; i < 8; i++) {
+    //printf("%d\n", ds->parents[i]);
     assert(ds->parents[i] == 0);
   }
   for (int i = 8; i < 10; i++) {
