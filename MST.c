@@ -123,9 +123,16 @@ void join(DisjointSets *ds, int x, int y) {
   root_y = find(ds, y);
 
   if (ds->ranks[root_x] > ds->ranks[root_y]) {
-    
+    ds->parents[root_y] = root_x;
   }
-  return;  // Do the stuff before returning
+  else if (ds->ranks[root_x] < ds->ranks[root_y]) {
+    ds->parents[root_x] = root_y;
+  }
+  else
+  {
+    ds->parents[root_x] = root_y;
+    ds->ranks[root_y]++;
+  }
 }
 
 /// @brief Free up the memory allocated into the Disjoint Sets structure
