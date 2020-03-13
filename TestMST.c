@@ -62,6 +62,8 @@ void test_ds2() {
   }
 }
 
+// add test for checking if freeDisjointSets works
+
 /// @brief Checks if 2 Edges are equal
 int compareEdge(Edge *x, Edge *y) {
   return (x->a == y->a && x->b == y->b &&

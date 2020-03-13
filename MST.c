@@ -142,7 +142,10 @@ void join(DisjointSets *ds, int x, int y) {
 /// @TODO: Free all the memory allocated, including the arrays inside as well
 ///        as the actual struct itself.
 void freeDisjointSets(DisjointSets *ds) {
-  return;  // Do the stuff before returning
+  
+  free(ds->parents);
+  free(ds->ranks);
+  free(ds);
 }
 
 /// @brief Comparison function (used in qsort) to help sort the edges.
