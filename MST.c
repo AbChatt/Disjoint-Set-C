@@ -161,6 +161,13 @@ void freeDisjointSets(DisjointSets *ds) {
 ///        not really take you more than 3 lines - it's just there because you
 ///        need it)
 int compareEdgeCosts(const void *x, const void *y) {
+  const Edge *a = (const Edge *)x;
+  const Edge *b = (const Edge *)y;
+
+  if (a->cost >= b->cost) {
+    return 1;
+  }
+
   return 0;  // Return the correct value.
 }
 
