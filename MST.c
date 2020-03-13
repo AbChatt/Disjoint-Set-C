@@ -41,14 +41,34 @@ void printDisjointSets(DisjointSets *ds) {
 ///        MakeSet() on all the nodes
 DisjointSets *makeDisjointSets(int n) {
   DisjointSets *new_disjoint_set = malloc(1 * sizeof(DisjointSets));
+
+  if (new_disjoint_set == NULL) {
+    printf("Error occurred! Exiting program...\n");
+    return new_disjoint_set;
+  }
+
   new_disjoint_set->parents = malloc(n * sizeof(int *));
+
+  if (new_disjoint_set->parents == NULL) {
+    printf("Error occurred! Exiting program...\n");
+    return new_disjoint_set->parents;
+  }
+
   new_disjoint_set->ranks = malloc(n * sizeof(int *));
+
+  if (new_disjoint_set->ranks == NULL) {
+    printf("Error occurred! Exiting program...\n");
+    return new_disjoint_set->ranks;
+  }
+
+  //new_disjoint_set->parents = { -1 };
+  //new_disjoint_set->ranks = { -1 };
   new_disjoint_set->size = 0;
 
   for (int i = 0; i < n; i++) {
     new_disjoint_set->parents[i] = i;
     new_disjoint_set->ranks[i] = 0;
-    new_disjoint_set->size++;
+    new_disjoint_set->size++;    
   }
   
   return new_disjoint_set;
