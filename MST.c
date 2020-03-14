@@ -18,6 +18,7 @@
 
 /// @brief Prints out the data corresponding to the disjoint sets structure.
 ///        Only here for debugging. Feel free to change this if you'd like.
+
 void printDisjointSets(DisjointSets *ds) {
   printf("Parents: [");
   for (int i = 0; i < ds->size; i++) printf("%d, ", ds->parents[i]);
@@ -39,6 +40,7 @@ void printDisjointSets(DisjointSets *ds) {
 /// @TODO: Finish this function. Make sure the `parents` and `ranks` arrays are
 ///        allocated and initialized appropriately. You are effectively calling
 ///        MakeSet() on all the nodes
+
 DisjointSets *makeDisjointSets(int n) {
   DisjointSets *new_disjoint_set = malloc(1 * sizeof(DisjointSets));
 
@@ -61,8 +63,6 @@ DisjointSets *makeDisjointSets(int n) {
     return NULL;
   }
 
-  //new_disjoint_set->parents = { -1 };
-  //new_disjoint_set->ranks = { -1 };
   new_disjoint_set->size = 0;
 
   for (int i = 0; i < n; i++) {
@@ -115,6 +115,7 @@ int find(DisjointSets *ds, int n) {  // with compress
 ///        nodes have the same rank, then set the parent of x's root to y's
 ///        root, and increase the latter's rank by one. Otherwise, the root
 ///        with the higher rank becomes the parent of the other.
+
 void join(DisjointSets *ds, int x, int y) {
   int root_x = -1;
   int root_y = -1;
@@ -141,6 +142,7 @@ void join(DisjointSets *ds, int x, int y) {
 ///
 /// @TODO: Free all the memory allocated, including the arrays inside as well
 ///        as the actual struct itself.
+
 void freeDisjointSets(DisjointSets *ds) {
   
   free(ds->parents);
@@ -160,6 +162,7 @@ void freeDisjointSets(DisjointSets *ds) {
 ///        of edge `y`, return 1. Otherwise, return 0. (This function should
 ///        not really take you more than 3 lines - it's just there because you
 ///        need it)
+
 int compareEdgeCosts(const void *x, const void *y) {
   const Edge *a = (const Edge *)x;
   const Edge *b = (const Edge *)y;
@@ -187,8 +190,8 @@ int compareEdgeCosts(const void *x, const void *y) {
 ///
 /// @TODO: Complete this function. You may want to look into how the function
 ///        `qsort()` works in case you need it (hint hint).
+
 void findMST(Edge graph[], int n, int m, Edge mst[]) {
-  // hint: code is only 1 if statement
   DisjointSets *ds = makeDisjointSets(n);
 
   qsort(graph, m, sizeof(Edge), compareEdgeCosts);
