@@ -82,18 +82,18 @@ DisjointSets *makeDisjointSets(int n) {
 /// @TODO: Find and return the root of the node `x`. Make sure you perform path
 ///        compression while you are performing the find.
 
-int find(DisjointSets *ds, int n) {  // with compress
+int find(DisjointSets *ds, int x) {  // with compress
   int root = -1;
   int parent = -1;
   int temp = -1;
 
-  root = n;
+  root = x;
 
   while (ds->parents[root] != root) {
     root = ds->parents[root];
   }
 
-  parent = n;
+  parent = x;
 
   // path compression
   while (ds->parents[parent] != root) {
