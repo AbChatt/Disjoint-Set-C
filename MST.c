@@ -168,7 +168,7 @@ int compareEdgeCosts(const void *x, const void *y) {
     return 1;
   }
 
-  return 0;  // Return the correct value.
+  return 0;
 }
 
 /// @brief Performs Kruskal's algorithm on the given graph and returns the
@@ -189,5 +189,14 @@ int compareEdgeCosts(const void *x, const void *y) {
 ///        `qsort()` works in case you need it (hint hint).
 void findMST(Edge graph[], int n, int m, Edge mst[]) {
   // hint: code is only 1 if statement
-  return;  // Compute and store the MST in `mst` before returning.
+  DisjointSets *ds = makeDisjointSets(n);
+
+  qsort(graph, m, sizeof(Edge), compareEdgeCosts);
+
+  for (int i = 0; i < n; i++) {
+    if (ds->parents[graph[i].a] != ds->parents[graph[i].b]) {
+      join(ds, graph[i].a, graph[i].b);
+      mst[i] = graph[i];
+    }
+  }
 }
